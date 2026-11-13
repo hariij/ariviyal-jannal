@@ -20,7 +20,7 @@ Update `HANDOFF.md`: the episode's status row, open decisions, the exact next th
 - The series starts from Mr. C Shanmugham's WhatsApp "Window on Science" posts, compiled in `source/ElevenGotIt.pdf` (48 posts, 16 Sep to 8 Nov 2026, numbered by him as WS1 to WS48 in `plan/seasons.md`).
 - Those posts reproduce the "Window on Science" boxes from Michael A. Seeds' astronomy textbooks (Cengage). The text belongs to the publisher.
 - **Never read out, quote at length, or show the book's text** in a script, video, page or post. Every script is Hari's own, written fresh in Tamil, teaching the same idea with Indian and Chennai examples in place of the book's American ones (chili and Texans, Steinbeck, pounds per square inch).
-- `source/` and `reference/` are listed in `.gitignore` and are never committed or published.
+- `source/` and `reference/` are listed in `.gitignore` and are never committed or published. The repo is public, so everything that is committed can be read by anyone.
 
 ## Credits (every episode, page and description)
 
@@ -59,7 +59,8 @@ plan/seasons.md                    the 48 topics in seasons, with episode number
 .claude/skills/ariviyal-jannal/    the series skill (the functions)
 episodes/EN-<slug>/                one folder per episode (see the skill)
 series/                            series look, sound kit, end card, credits text
-site/                              the website, built from episodes/
+site/                              the website's working source, built from episodes/
+dist/                              what is live at hariprav.in/ariviyal-jannal (GitHub Pages)
 source/      (gitignored)          ElevenGotIt.pdf, Mr. Shanmugham's posts
 reference/   (gitignored)          copies of Hari's other series skills, to borrow from
 ```

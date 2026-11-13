@@ -26,9 +26,9 @@ Made 14 Nov 2026 at Series setup (Claude Code):
 3. **Look:** faceless motion-graphics player, as in #TiffinPsychology, with short phone-filmed demo clips (hands only) so viewers see the home demo is real.
 4. **Long episode length:** 4 to 6 minutes.
 5. **Short length:** up to 90 seconds.
-6. **Site:** built domain-free with relative links. Hari, on the repo: "we will consider it as a subproject of hariprav.in/ariviyal-jannal or something similar", so hariprav.in/ariviyal-jannal is the working home; the exact path is still open. Hari, 14 Nov 2026: "we will keep it a separate repo": this repo stays on its own, and the site is copied or deployed into hariprav.in when it goes live.
+6. **Site:** built domain-free with relative links. Hari, on the repo: "we will consider it as a subproject of hariprav.in/ariviyal-jannal or something similar", and Hari, 14 Nov 2026: "we will keep it a separate repo". Settled the same day: the site is served at **hariprav.in/ariviyal-jannal** by GitHub Pages from this repo's `dist/` folder (the `deploy.yml` workflow his other hariprav.in projects use; it runs when `dist/` changes). `site/` is the working source; what is ready to go live is copied into `dist/`.
 7. **Release rhythm:** fortnightly (one episode every two weeks, its Short the next day).
-8. **Repo:** private, from the beginning: https://github.com/hariij/ariviyal-jannal (branch `main`, created 14 Nov 2026 after Hari ran `gh auth login`). `source/` and `reference/` are ignored and never pushed.
+8. **Repo:** https://github.com/hariij/ariviyal-jannal, branch `main`. Created private on 14 Nov 2026, then made **public** the same day with Hari's yes, because GitHub Free serves Pages only from public repos. Anyone can read it; only Hari (and collaborators he adds) can change it. Commits use his GitHub noreply address (set in this repo's git config; the first three commits were rewritten to it before going public). `source/` and `reference/` are ignored and never pushed.
 
 ## Open decisions
 
@@ -44,7 +44,8 @@ Made 14 Nov 2026 at Series setup (Claude Code):
 
 ## Series links
 
-- Repo (private): https://github.com/hariij/ariviyal-jannal
+- Repo (public): https://github.com/hariij/ariviyal-jannal
+- Site: https://hariprav.in/ariviyal-jannal/ (Pages on, from `dist/`; nothing deployed yet)
 - Season plan review page: https://claude.ai/artifact/SyeA9ysEWLDNgYLWbPtDoX (source `plan/season-plan.html`; saved order in its database, `plan/order`)
 
 ## Credits spent
@@ -54,4 +55,5 @@ None.
 ## Lessons since the last wrap-up
 
 - 14 Nov 2026: GitHub access here is through `gh` (HTTPS, logged in as hariij); the Mac's SSH key is not on GitHub. Check `gh auth status` before promising a push.
+- 14 Nov 2026: the repo is public, so anything committed is published, drafts included. Never commit book text, private notes or credentials.
 - 14 Nov 2026: a review page Hari edits keeps his choice in the artifact's database so the next session can read it without a paste.

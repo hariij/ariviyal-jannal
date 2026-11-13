@@ -127,5 +127,6 @@ episodes/EN-<slug>/
   renders/          eNN.mp4, eNN-short.mp4, versions beside each other
   thumbnail/  details/  socials/
 series/             the look, the sound kit, the end card, the credits text
-site/               the website (assets/, episodes/eNN/, index.html)
+site/               the website's working source (assets/, episodes/eNN/, index.html)
+dist/               what is live: copied from site/ when Hari approves; a push that changes it deploys to hariprav.in/ariviyal-jannal
 ```
