@@ -1,0 +1,16 @@
+# Copyrighted source text and private reference copies: never committed
+source/
+reference/
+
+# Large media: kept on the Mac, not in git
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.m4a
+renders/
+
+# System and tooling
+.DS_Store
+node_modules/
+__pycache__/

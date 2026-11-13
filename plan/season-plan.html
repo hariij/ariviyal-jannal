@@ -1,0 +1,245 @@
+<title>அறிவியல் ஜன்னல் Season Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;600;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column of seasons as window panes; each topic a row you drag or nudge; a sticky save bar */
+:root{
+  --bg:#eef2f7; --pane:#ffffff; --ink:#18213a; --muted:#5b6682; --line:#d5dce8;
+  --accent:#c98a06; --accent-ink:#1b1400; --sky:#2c4a8c; --ok:#2f7d4f; --warn:#b4541a;
+  --f-ta:"Mukta Malar","Noto Sans Tamil",system-ui,sans-serif;
+  --f-head:"Space Grotesk","Mukta Malar",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1424; --pane:#161f36; --ink:#e7ebf5; --muted:#9aa6c2; --line:#2a3657;
+  --accent:#f0b429; --accent-ink:#1b1400; --sky:#8fb0ff; --ok:#5cc28a; --warn:#f08a4b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1424; --pane:#161f36; --ink:#e7ebf5; --muted:#9aa6c2; --line:#2a3657;
+  --accent:#f0b429; --accent-ink:#1b1400; --sky:#8fb0ff; --ok:#5cc28a; --warn:#f08a4b; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ta);font-size:15px;line-height:1.5}
+.wrap{max-width:820px;margin:0 auto;padding-block:28px 120px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-ta);font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1.15;margin:0;text-wrap:balance}
+h1 small{display:block;font-family:var(--f-head);font-weight:500;font-size:.48em;color:var(--sky);margin-top:4px}
+.lede{color:var(--muted);max-width:62ch;margin:4px 0 0}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.fact{font-family:var(--f-mono);font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted);background:var(--pane)}
+.fact b{color:var(--ink);font-weight:500}
+.season{background:var(--pane);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.season.drop{outline:2px dashed var(--accent);outline-offset:-2px}
+.shead{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:3px solid var(--sky);flex-wrap:wrap}
+.snum{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.sname{flex:1 1 220px;min-width:0;font-family:var(--f-head);font-weight:700;font-size:18px;color:var(--ink);background:transparent;border:1px solid transparent;border-radius:4px;padding:2px 6px}
+.sname:hover{border-color:var(--line)}
+.sname:focus{outline:none;border-color:var(--accent)}
+.srange{font-family:var(--f-mono);font-size:12px;color:var(--sky);white-space:nowrap}
+ol{list-style:none;margin:0;padding:0}
+li.row{display:grid;grid-template-columns:auto auto 1fr auto;gap:10px;align-items:center;padding:9px 10px 9px 12px;border-top:1px solid var(--line);background:var(--pane)}
+li.row:first-child{border-top:0}
+li.row.dragging{opacity:.4}
+li.row.over{box-shadow:inset 0 3px 0 var(--accent)}
+li.row.moved .e{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.grip{cursor:grab;color:var(--muted);font-size:16px;line-height:1;user-select:none;touch-action:none}
+.e{font-family:var(--f-mono);font-size:13px;border:1px solid var(--sky);color:var(--sky);border-radius:4px;padding:1px 6px;min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+.t{min-width:0}
+.t .title{display:block;font-weight:600;line-height:1.35}
+.t .meta{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.ctl{display:flex;gap:4px;align-items:center}
+button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;cursor:pointer}
+.ctl button{width:30px;height:30px;font-size:14px;line-height:1}
+.ctl select{height:30px;font-size:12px;font-family:var(--f-mono);padding:0 4px;max-width:64px}
+button:hover,select:hover{border-color:var(--sky)}
+button:focus-visible,select:focus-visible,textarea:focus-visible,.sname:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.35;cursor:default}
+.empty{padding:14px;color:var(--muted);font-size:13px}
+.notes{display:grid;gap:8px}
+.notes label{font-weight:600}
+textarea{font:inherit;color:var(--ink);background:var(--pane);border:1px solid var(--line);border-radius:6px;padding:10px;min-height:96px;resize:vertical;width:100%}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--pane);border-top:1px solid var(--line);padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:5}
+.bar .in{max-width:820px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.status{flex:1 1 200px;min-width:0;font-size:13px;color:var(--muted)}
+.status.dirty{color:var(--warn)} .status.ok{color:var(--ok)}
+.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;padding:8px 16px}
+.primary:hover{border-color:var(--ink)}
+.ghost{padding:8px 12px;font-size:13px}
+.confirm{display:flex;gap:6px;align-items:center;font-size:13px}
+footer{color:var(--muted);font-size:12.5px;display:grid;gap:4px}
+@media (max-width:520px){
+  li.row{grid-template-columns:auto 1fr;grid-template-areas:"e t" "e c"}
+  .grip{display:none}
+  .e{grid-area:e;align-self:start}
+  .t{grid-area:t}
+  .ctl{grid-area:c}
+}
+@media (prefers-reduced-motion:no-preference){li.row{transition:background .2s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Season plan · review</div>
+    <h1>அறிவியல் ஜன்னல்<small>Window on Science · 48 topics in 7 seasons</small></h1>
+    <p class="lede">வரிசையை மாற்ற இழுத்து விடுங்கள், அல்லது ↑ ↓ அழுத்துங்கள். ஒரு தலைப்பை வேறு பருவத்துக்கு அனுப்ப "S" பெட்டியைப் பயன்படுத்துங்கள். பருவத்தின் பெயரைத் தொட்டு மாற்றலாம். முடிந்ததும் Save. Claude அடுத்த அமர்வில் இதைப் படித்து <code>plan/seasons.md</code>-ஐ மாற்றும்.</p>
+    <div class="facts" id="facts"></div>
+  </header>
+
+  <main id="seasons" style="display:grid;gap:16px"></main>
+
+  <section class="notes">
+    <label for="note">Claude-க்கு குறிப்பு (விரும்பினால்)</label>
+    <textarea id="note" placeholder="எ.கா. E05-ஐ E04-க்கு முன் வை; Season 6-க்கு தமிழ்ப் பெயர் யோசி..."></textarea>
+  </section>
+
+  <footer>
+    <span>E numbers follow the order on this page. Topic titles are the book's English topic names, for reference only; each episode's Tamil title is written with its script.</span>
+    <span>WS = Mr. C Shanmugham's post number. Inspired by the "Window on Science" boxes in Michael A. Seeds' astronomy textbooks.</span>
+  </footer>
+</div>
+
+<div class="bar"><div class="in">
+  <span class="status" id="status" role="status">Loading the saved order…</span>
+  <span id="resetWrap"><button class="ghost" id="reset" type="button">Reset to plan</button></span>
+  <button class="primary" id="save" type="button">Save order</button>
+</div></div>
+
+<script>
+const TOPICS={
+1:["Scientific models: frameworks for thinking about nature","16 Sep"],2:["Understanding versus naming","17 Sep"],3:["Astrology and pseudoscience: misusing the rules of science","18 Sep"],4:["Evidence","19 Sep"],5:["Scientific revolutions","20 Sep"],6:["Levels of confidence: hypothesis, theory and law","21 Sep"],7:["The unstated assumption of science: cause and effect","22 Sep"],8:["Testing a theory by prediction","23 Sep"],9:["Resolving power and the accuracy of a measurement","24 Sep"],10:["Quantum mechanics: the world of the very small","25 Sep"],11:["Two kinds of theories: evolution and catastrophe","26 Sep"],12:["Scientists: skeptical storytellers","27 Sep"],13:["Reconstructing the past through science","28 Sep"],14:["How hypotheses and theories unify the details","29 Sep"],15:["Follow the energy","30 Sep"],16:["Graphical data manipulation","1 Oct"],17:["The present is the key to the past","2 Oct"],18:["Science, technology, and engineering","3 Oct"],19:["Who pays for science?","4 Oct"],20:["Enjoying the natural world","5 Oct"],21:["Building confidence by confirmation and consolidation","8 Oct"],22:["Avoiding hasty judgments: scientific faith","7 Oct"],23:["Learning about nature through chains of inference","8 Oct"],24:["Information about nature: basic scientific data","9 Oct"],25:["Separating facts from theories","10 Oct"],26:["Quantitative thinking with mathematical models","11 Oct"],27:["Causes in nature: the very small and the very large","12 Oct"],28:["Astronomical images, false color, and reality","13 Oct"],29:["The impossibility of proof in science","14 Oct"],30:["Natural checks on fraud in science","15 Oct"],31:["The calibration of one parameter to find another","16 Oct"],32:["Understanding nature as processes","17 Oct"],33:["Searching for clues through classification","18 Oct"],34:["Selection effects in science","19 Oct"],35:["It wouldn't stand up in court: statistical evidence","20 Oct"],36:["Scientific arguments","21 Oct"],37:["Reasoning by analogy","22 Oct"],38:["Why scientists speak carefully: words lead thoughts","23 Oct"],39:["The nature of scientific explanation","24 Oct"],40:["UFOs and space aliens","25 Oct"],41:["Gravity: the universal force","1 Nov"],42:["3-D relationships","2 Nov"],43:["Mass","3 Nov"],44:["Energy","4 Nov"],45:["Thermal energy","5 Nov"],46:["Density","6 Nov"],47:["Exponential scales","7 Nov"],48:["Pressure","8 Nov"]};
+const PLAN=[
+ {name:"Spotting fake science",ws:[3,40,30]},
+ {name:"How science thinks",ws:[1,2,6,25,29,38,39]},
+ {name:"Evidence and testing",ws:[4,8,12,21,22,23,34,35,36]},
+ {name:"Measuring the world",ws:[9,24,31,26,47,16,28,42]},
+ {name:"Causes and processes",ws:[7,15,27,32,11,13,17,14,33,37,10]},
+ {name:"The basic quantities",ws:[41,43,44,45,46,48]},
+ {name:"Science and society",ws:[5,18,19,20]}];
+const clone=o=>JSON.parse(JSON.stringify(o));
+let state={seasons:clone(PLAN),note:""};
+let saved=JSON.stringify(state);
+let savedAt=null, dirty=false, canWrite=true, db=null, ref=null, dragWs=null;
+const $=id=>document.getElementById(id);
+const planE={};{let n=1;PLAN.forEach(s=>s.ws.forEach(w=>planE[w]=n++));}
+const pad=n=>"E"+String(n).padStart(2,"0");
+
+function render(){
+  const main=$("seasons");main.textContent="";
+  let e=1;
+  state.seasons.forEach((s,si)=>{
+    const sec=document.createElement("section");sec.className="season";sec.dataset.si=si;
+    const h=document.createElement("div");h.className="shead";
+    const num=document.createElement("span");num.className="snum";num.textContent="Season "+(si+1);
+    const nm=document.createElement("input");nm.className="sname";nm.id="sname-"+si;nm.value=s.name;nm.setAttribute("aria-label","Season "+(si+1)+" name");
+    nm.addEventListener("input",()=>{s.name=nm.value;mark();});
+    const first=e,last=e+s.ws.length-1;
+    const rg=document.createElement("span");rg.className="srange";rg.textContent=s.ws.length?pad(first)+" to "+pad(last)+" · "+s.ws.length:"empty";
+    const up=btn("↑","Move season up",si===0,()=>{swap(state.seasons,si,si-1);mark();render();});
+    const dn=btn("↓","Move season down",si===state.seasons.length-1,()=>{swap(state.seasons,si,si+1);mark();render();});
+    const c=document.createElement("span");c.className="ctl";c.append(up,dn);
+    h.append(num,nm,rg,c);sec.append(h);
+    const ol=document.createElement("ol");
+    if(!s.ws.length){const p=document.createElement("div");p.className="empty";p.textContent="Drop a topic here.";sec.append(p);}
+    s.ws.forEach((w,i)=>{
+      const li=document.createElement("li");li.className="row";li.draggable=true;li.dataset.ws=w;
+      if(planE[w]!==e)li.classList.add("moved");
+      const g=document.createElement("span");g.className="grip";g.textContent="⠿";g.setAttribute("aria-hidden","true");
+      const en=document.createElement("span");en.className="e";en.textContent=pad(e);
+      const t=document.createElement("span");t.className="t";
+      const tt=document.createElement("span");tt.className="title";tt.textContent=TOPICS[w][0];
+      const m=document.createElement("span");m.className="meta";m.textContent="WS"+w+" · posted "+TOPICS[w][1]+(planE[w]!==e?" · was "+pad(planE[w]):"");
+      t.append(tt,m);
+      const ctl=document.createElement("span");ctl.className="ctl";
+      ctl.append(
+        btn("↑","Move up",si===0&&i===0,()=>move(w,-1)),
+        btn("↓","Move down",si===state.seasons.length-1&&i===s.ws.length-1,()=>move(w,1)));
+      const sel=document.createElement("select");sel.id="sel-"+w;sel.setAttribute("aria-label","Move WS"+w+" to season");
+      state.seasons.forEach((_,k)=>{const o=document.createElement("option");o.value=k;o.textContent="S"+(k+1);if(k===si)o.selected=true;sel.append(o);});
+      sel.addEventListener("change",()=>{const k=+sel.value;s.ws.splice(i,1);state.seasons[k].ws.push(w);mark();render();});
+      ctl.append(sel);
+      li.append(g,en,t,ctl);
+      li.addEventListener("dragstart",ev=>{dragWs=w;li.classList.add("dragging");ev.dataTransfer.effectAllowed="move";try{ev.dataTransfer.setData("text/plain",String(w));}catch(_){}} );
+      li.addEventListener("dragend",()=>{dragWs=null;document.querySelectorAll(".dragging,.over,.drop").forEach(x=>x.classList.remove("dragging","over","drop"));});
+      li.addEventListener("dragover",ev=>{if(dragWs==null)return;ev.preventDefault();li.classList.add("over");});
+      li.addEventListener("dragleave",()=>li.classList.remove("over"));
+      li.addEventListener("drop",ev=>{ev.preventDefault();ev.stopPropagation();if(dragWs==null||dragWs===w)return;place(dragWs,si,w);});
+      ol.append(li);e++;
+    });
+    sec.append(ol);
+    sec.addEventListener("dragover",ev=>{if(dragWs==null)return;ev.preventDefault();sec.classList.add("drop");});
+    sec.addEventListener("dragleave",ev=>{if(!sec.contains(ev.relatedTarget))sec.classList.remove("drop");});
+    sec.addEventListener("drop",ev=>{ev.preventDefault();if(dragWs==null)return;place(dragWs,si,null);});
+    main.append(sec);
+  });
+  const total=state.seasons.reduce((a,s)=>a+s.ws.length,0);
+  const moved=Object.keys(planE).filter(w=>planE[w]!==currentE()[w]).length;
+  $("facts").innerHTML="";
+  [["Topics",total],["Seasons",state.seasons.length],["Rhythm","fortnightly"],["At that pace","about "+Math.round(total*2/4.345)+" months"],["Moved from plan",moved]].forEach(([k,v])=>{const f=document.createElement("span");f.className="fact";f.append(k+" ");const b=document.createElement("b");b.textContent=v;f.append(b);$("facts").append(f);});
+  if($("note").value!==state.note && document.activeElement!==$("note"))$("note").value=state.note;
+  status();
+}
+function currentE(){const m={};let n=1;state.seasons.forEach(s=>s.ws.forEach(w=>m[w]=n++));return m;}
+function btn(txt,label,dis,fn){const b=document.createElement("button");b.type="button";b.textContent=txt;b.setAttribute("aria-label",label);b.title=label;b.disabled=!!dis;b.addEventListener("click",fn);return b;}
+function swap(a,i,j){[a[i],a[j]]=[a[j],a[i]];}
+function locate(w){for(let si=0;si<state.seasons.length;si++){const i=state.seasons[si].ws.indexOf(w);if(i>=0)return[si,i];}return[-1,-1];}
+function move(w,d){
+  const[si,i]=locate(w);const s=state.seasons[si];
+  if(d<0){ if(i>0)swap(s.ws,i,i-1); else if(si>0){s.ws.splice(i,1);state.seasons[si-1].ws.push(w);} }
+  else { if(i<s.ws.length-1)swap(s.ws,i,i+1); else if(si<state.seasons.length-1){s.ws.splice(i,1);state.seasons[si+1].ws.unshift(w);} }
+  mark();render();
+  const b=document.querySelector('li[data-ws="'+w+'"] .ctl button:'+(d<0?'first-child':'nth-child(2)'));if(b&&!b.disabled)b.focus();
+}
+function place(w,si,beforeW){
+  const[fs,fi]=locate(w);state.seasons[fs].ws.splice(fi,1);
+  const list=state.seasons[si].ws;const at=beforeW==null?list.length:list.indexOf(beforeW);
+  list.splice(at<0?list.length:at,0,w);mark();render();
+}
+function mark(){dirty=JSON.stringify(state)!==saved;status();}
+function status(){
+  const el=$("status");el.className="status";
+  if(!canWrite){el.textContent="View only. Only Hari can save the order.";$("save").disabled=true;return;}
+  $("save").disabled=!dirty||!ref;
+  if(dirty){el.classList.add("dirty");el.textContent="Unsaved changes.";}
+  else if(savedAt){el.classList.add("ok");el.textContent="Saved "+new Date(savedAt).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+".";}
+  else if(!ref){el.textContent="Saving is not available here. You can still try orders on this page.";}
+  else el.textContent="This is the plan as set at Series setup. Nothing changed yet.";
+}
+$("note").addEventListener("input",()=>{state.note=$("note").value;mark();});
+$("save").addEventListener("click",async()=>{
+  if(!ref)return;const b=$("save");b.disabled=true;$("status").textContent="Saving…";
+  const body={seasons:clone(state.seasons),note:state.note,savedAt:new Date().toISOString()};
+  try{await ref.set(body);saved=JSON.stringify(state);savedAt=body.savedAt;dirty=false;status();}
+  catch(e){const el=$("status");el.className="status dirty";el.textContent=(e&&e.code==="invalid_argument")?"This view cannot save. Only Hari can save the order.":"Could not save just now. Try again in a moment.";if(e&&e.code==="invalid_argument"){canWrite=false;}b.disabled=false;}
+});
+function askReset(){
+  const w=$("resetWrap");w.textContent="";const c=document.createElement("span");c.className="confirm";c.append("Back to the Series setup order? ");
+  const y=btn("Yes","Reset to plan",false,()=>{state.seasons=clone(PLAN);mark();render();restore();});y.style.width="auto";y.style.padding="4px 10px";
+  const n=btn("No","Keep this order",false,restore);n.style.width="auto";n.style.padding="4px 10px";
+  c.append(y,n);w.append(c);y.focus();
+}
+function restore(){const w=$("resetWrap");w.textContent="";const b=btn("Reset to plan","Reset to plan",false,askReset);b.className="ghost";b.id="reset";w.append(b);}
+$("reset").addEventListener("click",askReset);
+render();
+
+(async()=>{
+  try{
+    const user=await (window.claude?.use?.("user")??null);
+    if(user){const cw=await user.can("data.write");if(cw===false)canWrite=false;}
+    db=await (window.claude?.use?.("db")??null);
+  }catch(_){db=null;}
+  if(!db){status();return;}
+  ref=db.doc("plan/order");
+  let timer=setTimeout(()=>{if(!savedAt){$("status").textContent="The saved order can't be reached yet. Showing the Series setup plan.";}},10000);
+  ref.onSnapshot(snap=>{
+    if(!snap.metadata.fromCache)clearTimeout(timer);
+    if(snap.exists){
+      const d=snap.data();
+      if(Array.isArray(d.seasons)&&!dirty){
+        state={seasons:clone(d.seasons).map(s=>({name:String(s.name||""),ws:(s.ws||[]).map(Number).filter(w=>TOPICS[w])})),note:String(d.note||"")};
+        saved=JSON.stringify(state);savedAt=d.savedAt||null;render();return;
+      }
+    }
+    status();
+  },err=>{clearTimeout(timer);ref=null;status();});
+})();
+</script>
