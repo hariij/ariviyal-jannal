@@ -5,8 +5,7 @@ Read at the start of every session; update at the end. Newest information wins o
 ## Next step
 
 1. **Season plan page:** Hari reorders on https://claude.ai/artifact/SyeA9ysEWLDNgYLWbPtDoX (private) and presses Save if he wants changes. The next session reads it (`ArtifactData` get, collection `plan`, doc `order`); if a saved order exists and differs from `plan/seasons.md`, it updates `seasons.md` and the E numbers before anything else. No saved document means the plan stands as it is.
-2. **GitHub remote:** waiting on Hari (see open decision 9).
-3. Then Hari says **E01 brief** (WS3, astrology and pseudoscience).
+2. Then Hari says **E01 brief** (WS3, astrology and pseudoscience).
 
 ## Decisions
 
@@ -29,13 +28,12 @@ Made 14 Nov 2026 at Series setup (Claude Code):
 5. **Short length:** up to 90 seconds.
 6. **Site:** built domain-free with relative links. Hari, on the repo: "we will consider it as a subproject of hariprav.in/ariviyal-jannal or something similar", so hariprav.in/ariviyal-jannal is the working home; the exact path is still open.
 7. **Release rhythm:** fortnightly (one episode every two weeks, its Short the next day).
-8. **Repo:** private, from the beginning. Local git set up at Series setup (`main`); `source/` and `reference/` ignored.
+8. **Repo:** private, from the beginning: https://github.com/hariij/ariviyal-jannal (branch `main`, created 14 Nov 2026 after Hari ran `gh auth login`). `source/` and `reference/` are ignored and never pushed.
 
 ## Open decisions
 
 | # | Decision | Options | Claude's recommendation |
 |---|---|---|---|
-| 9 | GitHub remote for the private repo | Hari asked Claude to use "the git connector that you already have access to". This Claude Code session has no GitHub connector: `gh` is not logged in and the Mac's SSH key is refused by GitHub. Options: Hari runs `gh auth login` once in Terminal, then Claude creates the private repo and pushes / Hari creates an empty private repo on github.com and gives the URL / connect the GitHub connector to this Claude Code session | `gh auth login` once; then Claude does the rest |
 | 10 | "Subproject of hariprav.in/ariviyal-jannal" | A separate private repo `ariviyal-jannal` whose site is later published under hariprav.in/ariviyal-jannal / a folder inside the hariprav.in repo (submodule or copy) | A separate repo; the site is copied or deployed into hariprav.in when it goes live |
 | 11 | Release start date for E01 | | Set once E01's script is approved |
 
@@ -47,6 +45,7 @@ Made 14 Nov 2026 at Series setup (Claude Code):
 
 ## Series links
 
+- Repo (private): https://github.com/hariij/ariviyal-jannal
 - Season plan review page: https://claude.ai/artifact/SyeA9ysEWLDNgYLWbPtDoX (source `plan/season-plan.html`; saved order in its database, `plan/order`)
 
 ## Credits spent
@@ -55,5 +54,5 @@ None.
 
 ## Lessons since the last wrap-up
 
-- 14 Nov 2026: this Claude Code session had no GitHub access (no `gh` login, SSH key refused); check `gh auth status` before promising a push.
+- 14 Nov 2026: GitHub access here is through `gh` (HTTPS, logged in as hariij); the Mac's SSH key is not on GitHub. Check `gh auth status` before promising a push.
 - 14 Nov 2026: a review page Hari edits keeps his choice in the artifact's database so the next session can read it without a paste.
