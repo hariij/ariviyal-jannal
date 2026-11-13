@@ -26,7 +26,7 @@ Made 14 Nov 2026 at Series setup (Claude Code):
 3. **Look:** faceless motion-graphics player, as in #TiffinPsychology, with short phone-filmed demo clips (hands only) so viewers see the home demo is real.
 4. **Long episode length:** 4 to 6 minutes.
 5. **Short length:** up to 90 seconds.
-6. **Site:** built domain-free with relative links. Hari, on the repo: "we will consider it as a subproject of hariprav.in/ariviyal-jannal or something similar", so hariprav.in/ariviyal-jannal is the working home; the exact path is still open.
+6. **Site:** built domain-free with relative links. Hari, on the repo: "we will consider it as a subproject of hariprav.in/ariviyal-jannal or something similar", so hariprav.in/ariviyal-jannal is the working home; the exact path is still open. Hari, 14 Nov 2026: "we will keep it a separate repo": this repo stays on its own, and the site is copied or deployed into hariprav.in when it goes live.
 7. **Release rhythm:** fortnightly (one episode every two weeks, its Short the next day).
 8. **Repo:** private, from the beginning: https://github.com/hariij/ariviyal-jannal (branch `main`, created 14 Nov 2026 after Hari ran `gh auth login`). `source/` and `reference/` are ignored and never pushed.
 
@@ -34,7 +34,6 @@ Made 14 Nov 2026 at Series setup (Claude Code):
 
 | # | Decision | Options | Claude's recommendation |
 |---|---|---|---|
-| 10 | "Subproject of hariprav.in/ariviyal-jannal" | A separate private repo `ariviyal-jannal` whose site is later published under hariprav.in/ariviyal-jannal / a folder inside the hariprav.in repo (submodule or copy) | A separate repo; the site is copied or deployed into hariprav.in when it goes live |
 | 11 | Release start date for E01 | | Set once E01's script is approved |
 
 ## Status
